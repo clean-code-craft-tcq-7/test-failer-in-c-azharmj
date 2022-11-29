@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <assert.h>
+#define DEFAULT_STUB_VALUE 200
+#define DEFAULT_INTEGRATION_ENV 1
+#define DEFAULT_TEST_ENV 2
 
 int alertFailureCount = 0;
+int Current_Env = DEFAULT_INTEGRATION_ENV;
+
 
 int networkAlertStub(float celcius) {
     printf("ALERT: Temperature is %.1f celcius.\n", celcius);
@@ -13,7 +18,14 @@ int networkAlertStub(float celcius) {
 
 void alertInCelcius(float farenheit) {
     float celcius = (farenheit - 32) * 5 / 9;
-    int returnCode = networkAlertStub(celcius);
+    if(Current_Env == DEFAULT_INTEGRATION_ENV)
+    {
+        int returnCode = DEFAULT_STUB_VALUE;
+    }
+    else
+    {
+        int returnCode = networkAlertStub(celcius);
+    }
     if (returnCode != 200) {
         // non-ok response is not an error! Issues happen in life!
         // let us keep a count of failures to report
