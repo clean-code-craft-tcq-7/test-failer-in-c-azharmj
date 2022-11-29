@@ -20,7 +20,7 @@ void alertInCelcius(float farenheit) {
     float celcius = (farenheit - 32) * 5 / 9;
     if(Current_Env == DEFAULT_INTEGRATION_ENV)
     {
-        int returnCode = DEFAULT_STUB_VALUE;
+        int returnCode = celcius;
     }
     else
     {
